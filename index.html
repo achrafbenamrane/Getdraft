@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
 <meta name="description" content="GetDraft — the sports recruiting app where athletes get discovered. Swipe, Draft, match with coaches and recruiters. Coming soon to the App Store and Google Play.">
 <meta property="og:title" content="GetDraft — Get discovered. It's a Draft!">
 <meta property="og:description" content="Athletes, coaches & recruiters connect with a single Draft. Free to start — coming soon to iOS & Android.">
@@ -383,8 +384,10 @@ footer{border-top:1px solid var(--line); padding:44px 0 40px; background:var(--b
 .reveal{opacity:0; transform:translateY(34px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
 .reveal.in{opacity:1; transform:none}
 
-/* ============ Responsive ============ */
-@media (max-width:960px){
+/* ============ Responsive ============
+   (pointer:coarse) covers phones/tablets even when the browser forces a
+   desktop-size layout viewport ("Desktop site" mode / OEM browsers). */
+@media (max-width:960px), (pointer:coarse){
   .hero{height:auto}
   .hero-sticky{position:relative; height:auto; min-height:0; padding:110px 0 40px}
   .hero-in{grid-template-columns:1fr; gap:26px}
@@ -756,7 +759,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 40px; background:var(--b
   var match   = document.getElementById('match');
   var hint    = document.getElementById('hint');
   var hero    = document.querySelector('.hero');
-  var isMobile = window.matchMedia('(max-width:960px)').matches;
+  var isMobile = window.matchMedia('(max-width:960px), (pointer:coarse)').matches;
 
   var targetRY = -16, targetRX = 4, curRY = -16, curRX = 4, floatT = 0;
   var story = 0, curStory = 0, confettiFired = false;
