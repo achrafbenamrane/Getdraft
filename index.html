@@ -731,6 +731,23 @@ footer{border-top:1px solid var(--line); padding:44px 0 40px; background:var(--b
 </footer>
 
 <script>
+/* Desktop-site-mode rescue: some mobile browsers force a ~980px layout
+   viewport and ignore the meta viewport ("Desktop site" / PC mode).
+   Zoom the root so the page lays out at the true device width — media
+   queries re-evaluate against the corrected width automatically. */
+(function(){
+  try{
+    if(!window.matchMedia('(pointer:coarse)').matches) return;
+    var dw = Math.min(screen.width, screen.height) || 390;
+    function fix(){
+      var z = parseFloat(document.documentElement.style.zoom) || 1;
+      var lw = document.documentElement.clientWidth * z;
+      if(lw > dw * 1.4){ document.documentElement.style.zoom = lw / dw; }
+    }
+    fix();
+    window.addEventListener('orientationchange', function(){ setTimeout(fix, 350); });
+  }catch(e){}
+})();
 (function(){
   'use strict';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
